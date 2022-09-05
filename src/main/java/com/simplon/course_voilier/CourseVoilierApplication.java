@@ -1,10 +1,5 @@
 package com.simplon.course_voilier;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
@@ -26,7 +21,7 @@ public class CourseVoilierApplication{
 	private Environment env;
 
 	public static void main(String[] args) {
-		SpringApplication.run(CourseVoilierApplication.class, args);	
+		SpringApplication.run(CourseVoilierApplication.class, args);
 	}
 	
 	@Bean(name="encryptorBean")
