@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Flots bleus</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+   </head>
+   <body>
+        <tbody>
+            <tr th:each="sponsor: ${sponsors}">
+                <td><img th:src="@{${'/img/logo/' + sponsor.logo}}"></td>
+                <td th:text="${sponsor.id}" />
+                <td th:text="${sponsor.nom}" />
+            </tr>
+        </tbody>
+   </body>
+</html>
