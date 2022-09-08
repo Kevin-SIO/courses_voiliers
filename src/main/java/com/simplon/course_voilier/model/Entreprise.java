@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,13 +22,14 @@ public class Entreprise {
 	@Column(name="id_entreprise")
 	private int id;
 	
-	@Column(name="nom_entreprise")
+	@Column(name = "nom_entreprise")
 	private String nom;
 	
 	private String logo;
 	
-//	@ManyToOne
-//	private Voilier voilier;
+	@ManyToOne
+	@JoinColumn(name = "id_voilier", referencedColumnName = "id_voilier")
+	private Voilier voilier;
 	
 
 }
