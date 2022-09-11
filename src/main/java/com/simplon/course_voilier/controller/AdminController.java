@@ -37,6 +37,7 @@ public class AdminController {
 			
 			Cookie cookie = new Cookie("identifiant", admin.getIdentifiant());
 			cookie.setHttpOnly(true);
+			cookie.setPath("/");
 			
 			response.addCookie(cookie);
 			
@@ -57,6 +58,21 @@ public class AdminController {
 			model.addAttribute("identifiant", id);
 			return "accueil_admin";
 		}
+	}
+	
+	@GetMapping("/admin/deconnexion")
+	public String deconnexion(Model model, HttpServletResponse response) {
+		
+		Cookie cookie = new Cookie("identifiant", null);
+		cookie.setMaxAge(0);
+		cookie.setHttpOnly(true);
+		cookie.setPath("/");
+		
+		response.addCookie(cookie);
+		
+		model.addAttribute("info", "Compte déconnecté");
+		return "connexion";
+		
 	}
 	
 	

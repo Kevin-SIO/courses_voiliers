@@ -11,29 +11,41 @@
               <div class="container">
                 <div class="columns is-centered">
                   <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+
                     <div class="notification is-danger is-light" th:if="${erreur != null}">
                         <button class="delete"></button>
                         <span th:text="${erreur}"></span>
                     </div>
+
+                    <div class="notification is-info is-light" th:if="${info != null}">
+                      <button class="delete"></button>
+                      <span th:text="${info}"></span>
+                  </div>
+
                     <form th:action="@{/admin}" method="post" class="box">
+
                       <div class="field">
                         <label for="" class="label">Identifiant</label>
                         <div class="control">
                           <input name="identifiant" type="text" placeholder="nomprenom" class="input" required>
                         </div>
                       </div>
+
                       <div class="field">
-                        <label for="" class="label">Password</label>
+                        <label for="" class="label">Mot de passe</label>
                         <div class="control">
                           <input name="mdp" type="password" placeholder="*******" class="input" required>
                         </div>
                       </div>
+
                       <div class="field">
                         <button class="button is-success">
                           Login
                         </button>
                       </div>
+
                     </form>
+
                   </div>
                 </div>
               </div>
