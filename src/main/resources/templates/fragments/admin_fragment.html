@@ -1,0 +1,20 @@
+<head th:fragment="header">
+    <meta charset="UTF-8" />
+    <title>Flots bleus | Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+
+<div class="columns" th:fragment="lateral_menu">
+    <div class="column is-2 has-background-dark has-text-light">
+        <aside class="menu">
+
+            <p th:text="${identifiant}"></p>
+            <a th:href="@{/admin/deconnexion}" class="has-text-white">Se déconnecter</a>
+
+            <ul class="menu-list">
+                <li><a th:href="@{/admin/sponsor}">Sponsor</a></li>
+            </ul>
+        </aside>
+    </div>
+</div>

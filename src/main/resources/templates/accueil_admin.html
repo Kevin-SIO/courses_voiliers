@@ -1,13 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Flots bleus</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    </head>
+    <head th:include="/fragments/admin_fragment :: header"></head>
     <body>
-        <p th:text="${identifiant}"></p>
-        <a th:href="@{/admin/deconnexion}">Se déconnecter</a>
+        <div class="columns" th:include="/fragments/admin_fragment :: lateral_menu"></div>
         <script th:src="@{/js/script.js}"></script>
     </body>
 </html>

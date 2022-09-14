@@ -5,3 +5,8 @@ body{
 .is-midnightblue{
     color: #000f52;
 }
+
+.menu-list a {
+    color: unset;
+}
+
