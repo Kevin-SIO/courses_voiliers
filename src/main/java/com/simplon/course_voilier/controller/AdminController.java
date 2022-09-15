@@ -1,5 +1,6 @@
 package com.simplon.course_voilier.controller;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -74,6 +75,7 @@ public class AdminController {
 		return "connexion";
 		
 	}
+	
 	
 	
 }

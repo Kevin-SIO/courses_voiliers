@@ -28,4 +28,8 @@ public class Voilier {
 	private int largeur;
 	@OneToMany(mappedBy = "voilier")
 	private List<Entreprise> entreprise;
+	
+	public String toString() {
+		return String.valueOf(this.id);
+	}
 }

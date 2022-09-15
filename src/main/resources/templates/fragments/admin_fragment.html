@@ -5,16 +5,32 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 
-<div class="columns" th:fragment="lateral_menu">
-    <div class="column is-2 has-background-dark has-text-light">
+<div th:fragment="lateral_menu">
+    <div class="has-background-dark has-text-light">
         <aside class="menu">
 
             <p th:text="${identifiant}"></p>
             <a th:href="@{/admin/deconnexion}" class="has-text-white">Se déconnecter</a>
 
             <ul class="menu-list">
-                <li><a th:href="@{/admin/sponsor}">Sponsor</a></li>
+                <li><a th:href="@{/admin/sponsors}">Sponsors</a></li>
             </ul>
         </aside>
     </div>
+</div>
+
+<div th:fragment="tableau (titres,objets)">
+    <button class="button is-success">Ajouter +</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <td th:each="titre : ${titres}" th:text="${titre}"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="objet : ${objets}">
+                <td th:each="value : ${objet.getAttributesValues()}" th:text="${value}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

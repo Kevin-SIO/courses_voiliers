@@ -5,6 +5,9 @@
             <div class="column is-3">
                 <div th:include="/fragments/admin_fragment :: lateral_menu"></div>
             </div>
+            <div class="column is-9">
+                <div th:include="/fragments/admin_fragment :: tableau (titres = ${titres}, objets= ${objets})"></div>
+            </div>
         </div>
         <script th:src="@{/js/script.js}"></script>
     </body>
