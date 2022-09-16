@@ -1,6 +1,5 @@
 package com.simplon.course_voilier.model;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -18,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "entreprise")
-public class Entreprise {
+public class Entreprise implements Model{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,15 +33,6 @@ public class Entreprise {
 	@JoinColumn(name = "id_voilier", referencedColumnName = "id_voilier")
 	private Voilier voilier;
 	
-	public static ArrayList<String> getAttributes(){
-		ArrayList<String> r = new ArrayList<>();
-		
-		for(Field f : Entreprise.class.getDeclaredFields()){
-			r.add(f.getName());
-		}
-		
-		return r;
-	}
 	
 	public ArrayList<String> getAttributesValues() {
 		ArrayList<String> r = new ArrayList<>();
@@ -53,6 +43,10 @@ public class Entreprise {
 		r.add(this.voilier.getNom());
 		
 		return r;
+	}
+	
+	public static ArrayList<String> getAttributes(){
+		return Model.getAttributes(Entreprise.class);
 	}
 	
 
