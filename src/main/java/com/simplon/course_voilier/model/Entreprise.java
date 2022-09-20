@@ -39,7 +39,7 @@ public class Entreprise implements Model{
 		
 		r.add(String.valueOf(this.id));
 		r.add(this.nom);
-		r.add(logo);
+		r.add(this.logo);
 		r.add(this.voilier.getNom());
 		
 		return r;
@@ -49,5 +49,7 @@ public class Entreprise implements Model{
 		return Model.getAttributes(Entreprise.class);
 	}
 	
-
+	public static ArrayList<String> getAttributesType() {
+		return Model.getAttributesClass(Entreprise.class);
+	}
 }

@@ -1,11 +1,11 @@
 package com.simplon.course_voilier.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.simplon.course_voilier.model.Entreprise;
 import com.simplon.course_voilier.service.EntrepriseService;
@@ -25,14 +25,19 @@ public class EntrepriseController {
 	
 	@GetMapping("/admin/sponsors")
 	public String adminSponsor(Model model) {
-		ArrayList<String> titres = new ArrayList<>();
-		titres.add("Id");
-		titres.add("Nom");
-		titres.add("Nom du bateau");
-		titres.add("lien image");
 		
+		model.addAttribute("type", "sponsors");
 		model.addAttribute("titres", Entreprise.getAttributes());
 		model.addAttribute("objets", es.getAllSponsor());
+		model.addAttribute("attributs", Entreprise.getAttributesType());
+		model.addAttribute("newObject", new Entreprise());
 		return "gestion";
+	}
+	
+	@PostMapping("/admin/sponsors/ajout")
+	public String addSponsor(@ModelAttribute Entreprise entreprise) {
+		es.addSponsor(entreprise);
+		
+		return "redirect:/admin/sponsors";
 	}
 }

@@ -30,6 +30,6 @@ public class Voilier {
 	private List<Entreprise> entreprise;
 	
 	public String toString() {
-		return String.valueOf(this.id);
+		return String.valueOf(this.nom);
 	}
 }

@@ -16,4 +16,15 @@ public interface Model {
 		
 		return r;
 	}
+	
+	static ArrayList<String> getAttributesClass(Class<?> c){
+		ArrayList<String> r = new ArrayList<>();
+		
+		for(Field f : c.getDeclaredFields()){
+			String fieldname = f.getGenericType().getTypeName();
+			r.add(fieldname.substring(fieldname.lastIndexOf(".")+1));
+		}
+		
+		return r;
+	}
 }

@@ -15,4 +15,8 @@ public class EntrepriseService {
 	public Iterable<Entreprise> getAllSponsor() {
 		return er.findAll();
 	}
+	
+	public void addSponsor(Entreprise e) {
+		er.save(e);
+	}
 }
