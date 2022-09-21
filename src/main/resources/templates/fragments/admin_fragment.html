@@ -20,7 +20,7 @@
 </div>
 
 <div th:fragment="tableau (titres,objets)">
-    <button class="button is-success">Ajouter +</button>
+    <button class="js-modal-trigger button is-success" data-target="modalAjout">Ajouter +</button>
     <table class="table">
         <thead>
             <tr>
@@ -35,27 +35,29 @@
     </table>
 </div>
 
-<div class="modal is-active" th:fragment="modalAjout(type,titres,attributs,newObject)">
-    <div class="modal-background"></div>
-    <div class="modal-content has-background-white">
-        <form th:action="@{${'/admin/' + type + '/ajout'}}" method="post" class="box" th:object="${newObject}">
-            <div th:each="attribut, stat : ${attributs}" th:if="${titres[stat.index]} != 'id'">
-                <div class="field">
-                    <label class="label" th:text="${titres[stat.index]}"></label>
-                    <div class="control" th:switch="${attribut}">
-                        <input th:name="${titres[stat.index]}" class="input" type="text" th:case="'String'">
-                        <input th:name="${titres[stat.index]}" type="number" th:case="*">
+<div th:fragment="modalAjout(type,titres,attributs,newObject)">
+    <div class="modal" id="modalAjout">
+        <div class="modal-background"></div>
+        <div class="modal-content has-background-white">
+            <form th:action="@{${'/admin/' + type + '/ajout'}}" method="post" class="box" th:object="${newObject}">
+                <div th:each="attribut, stat : ${attributs}" th:if="${titres[stat.index]} != 'id'">
+                    <div class="field">
+                        <label class="label" th:text="${titres[stat.index]}"></label>
+                        <div class="control" th:switch="${attribut}">
+                            <input th:name="${titres[stat.index]}" class="input" type="text" th:case="'String'">
+                            <input th:name="${titres[stat.index]}" type="number" th:case="*">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="field">
-                <div class="control">
-                  <button class="button is-link" type="submit">Ajouter</button>
-                </div>
-            </div>   
-        </form>
-        
+                <br>
+                <div class="field">
+                    <div class="control">
+                    <button class="button is-link" type="submit">Ajouter</button>
+                    </div>
+                </div>   
+            </form>
+            
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
 </div>
