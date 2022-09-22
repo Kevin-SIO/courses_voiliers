@@ -11,6 +11,7 @@ public interface Model {
 		ArrayList<String> r = new ArrayList<>();
 		
 		for(Field f : c.getDeclaredFields()){
+			if(!f.getType().getName().contains("List"))
 			r.add(f.getName());
 		}
 		
@@ -21,7 +22,8 @@ public interface Model {
 		ArrayList<String> r = new ArrayList<>();
 		
 		for(Field f : c.getDeclaredFields()){
-			String fieldname = f.getGenericType().getTypeName();
+			String fieldname = f.getType().getTypeName();
+			if(!fieldname.contains("List"))
 			r.add(fieldname.substring(fieldname.lastIndexOf(".")+1));
 		}
 		
