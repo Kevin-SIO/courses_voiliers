@@ -14,6 +14,14 @@ public class VoilierService {
 	@Autowired
 	VoilierRepo vr;
 	
+	public Iterable<Voilier> getAllVoilier() {
+		return vr.findAll();
+	}
+	
+	public void addVoilier(Voilier voilier) {
+		vr.save(voilier);
+	}
+	
 	public Optional<Voilier> getVoilier(int i) {
 		return vr.findById(i);
 	}
