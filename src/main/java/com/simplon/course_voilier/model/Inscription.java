@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="inscrire")
+@Table(name="inscription")
 public class Inscription implements Model{
 
 	@EmbeddedId

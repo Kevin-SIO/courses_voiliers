@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.simplon.course_voilier.model.Course;
+import com.simplon.course_voilier.model.Inscription;
 import com.simplon.course_voilier.service.CourseService;
+import com.simplon.course_voilier.service.InscriptionService;
 
 @Controller
 public class CourseController {
 
 	@Autowired
 	CourseService cs;
+	
+	@Autowired
+	InscriptionService is;
 	
 	@GetMapping("/admin/courses")
 	public String getCourses(Model model) {
@@ -36,7 +41,12 @@ public class CourseController {
 	
 	@GetMapping("/admin/courses/{id}")
 	public String updateCourses(@PathVariable int id,Model model) {
-		model.addAttribute("objet", cs.getCourse(id).get());
-		return "update";
+		model.addAttribute("type", "inscription");
+		model.addAttribute("titres", Inscription.getAttributes());
+		model.addAttribute("objets", is.getInscription(id));
+		model.addAttribute("attributs", Inscription.getAttributesType());
+		model.addAttribute("newObject", new Inscription());
+		
+		return "gestion";
 	}
 }
