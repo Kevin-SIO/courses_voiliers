@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.simplon.course_voilier.model.Admin;
 import com.simplon.course_voilier.service.AuthService;
 
 @Controller
