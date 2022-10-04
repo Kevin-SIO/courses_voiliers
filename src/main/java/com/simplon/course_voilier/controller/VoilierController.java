@@ -23,7 +23,7 @@ public class VoilierController {
 	
 	@GetMapping("admin/voiliers")
 	public String adminVoilier(Model model) {
-		model.addAttribute("type", "voiliers");
+		model.addAttribute("action", "admin/voiliers/ajout");
 		model.addAttribute("titres", Voilier.getAttributes());
 		model.addAttribute("objets", vs.getAllVoilier());
 		model.addAttribute("attributs", Voilier.getAttributesType());
@@ -40,7 +40,7 @@ public class VoilierController {
 	
 	@GetMapping("admin/type_voilier")
 	public String adminTypeVoilier(Model model) {
-		model.addAttribute("type", "type_voilier");
+		model.addAttribute("action", "admin/type_voilier/ajout");
 		model.addAttribute("titres", TypeVoilier.getAttributes());
 		model.addAttribute("objets", tvs.getAllTypeVoilier());
 		model.addAttribute("attributs", TypeVoilier.getAttributesType());

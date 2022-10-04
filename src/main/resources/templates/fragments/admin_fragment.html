@@ -67,8 +67,13 @@
                     <div class="field">
                         <label class="label" th:text="${titres[stat.index]}"></label>
                         <div class="control" th:switch="${attribut}">
-                            <input th:name="${titres[stat.index]}" class="input" type="text" th:case="'String'">
+                            <input th:name="${titres[stat.index]}" class="input" type="text" th:case="String">
                             <input th:name="${titres[stat.index]}" class="input" type="date" th:case="Date">
+                            <span th:case="Boolean">
+                                <input th:name="${titres[stat.index]}" type="radio" value="true" th:text="  Oui">
+                                <input th:name="${titres[stat.index]}" type="radio" value="false" th:text="  Non" checked>
+                            </span>
+                            
                             <input th:name="${titres[stat.index]}" class="input" type="number" th:case="*">
                         </div>
                     </div>

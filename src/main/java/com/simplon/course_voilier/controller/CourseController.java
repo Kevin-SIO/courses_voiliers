@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.simplon.course_voilier.model.Course;
 import com.simplon.course_voilier.model.Epreuve;
 import com.simplon.course_voilier.model.Inscription;
+import com.simplon.course_voilier.model.key.InscriptionKey;
 import com.simplon.course_voilier.service.CourseService;
 import com.simplon.course_voilier.service.EpreuveService;
 import com.simplon.course_voilier.service.InscriptionService;
@@ -49,16 +50,20 @@ public class CourseController {
 		return "update_course";
 	}
 	
-	@GetMapping("/admin/courses/{id}/inscription")
+	@GetMapping("/admin/courses/{id}/inscriptions")
 	public String inscriptionbyCourse(@PathVariable int id, Model model) {
-		Inscription inscription = new Inscription();
-		inscription.setCourse(cs.getCourse(id).get());
+
+		ArrayList<String> titres = Inscription.getAttributes();
+		titres.remove(2);
 		
-		model.addAttribute("type", "inscription");
-		model.addAttribute("titres", Inscription.getAttributes());
+		ArrayList<String> attributs = Inscription.getAttributesType();
+		attributs.remove(2);
+		
+		model.addAttribute("action", "/admin/courses/"+id+"/inscriptions/ajout");
+		model.addAttribute("titres", titres);
 		model.addAttribute("objets", is.getInscription(id));
-		model.addAttribute("attributs", Inscription.getAttributesType());
-		model.addAttribute("newObject", inscription);
+		model.addAttribute("attributs", attributs);
+		model.addAttribute("newObject", new Inscription());
 		
 		return "gestion";
 	}
@@ -87,5 +92,21 @@ public class CourseController {
 		es.addEpreuve(epreuve);
 		
 		return "redirect:admin/course/" + id + "/epreuves";
+	}
+	
+	@PostMapping("admin/courses/{id}/inscriptions/ajout")
+	public String addInscription(@PathVariable int id, @ModelAttribute Inscription inscription, Model model) {
+		
+		InscriptionKey key = new InscriptionKey();
+		key.setIdCourse(id);
+		key.setIdEquipage(inscription.getEquipage().getId());
+		key.setIdVoilier(inscription.getVoilier().getId());
+		
+		inscription.setCourse(cs.getCourse(id).get());
+		inscription.setId(key);
+		
+		is.addInscription(inscription);
+		
+		return "redirect:/admin/course/"+id+"inscription";
 	}
 }

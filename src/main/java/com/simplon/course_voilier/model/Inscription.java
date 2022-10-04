@@ -38,7 +38,6 @@ public class Inscription implements Model{
 	public ArrayList<String> getAttributesValues() {
 		ArrayList<String> r = new ArrayList<>();
 		
-		r.add(this.course.getNom() + " " + this.course.getAnnee());
 		r.add(this.voilier.getNom());
 		r.add(this.equipage.getNom());
 		r.add(String.valueOf(this.desistement));

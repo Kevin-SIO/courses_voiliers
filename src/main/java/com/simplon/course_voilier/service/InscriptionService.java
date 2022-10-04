@@ -15,4 +15,8 @@ public class InscriptionService {
 	public Iterable<Inscription> getInscription(int idCourse) {
 		return ir.findByCourse_Id(idCourse);
 	}
+	
+	public void addInscription(Inscription inscription) {
+		ir.save(inscription);
+	}
 }

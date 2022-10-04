@@ -26,7 +26,7 @@ public class EntrepriseController {
 	@GetMapping("/admin/sponsors")
 	public String adminSponsor(Model model) {
 		
-		model.addAttribute("type", "sponsors");
+		model.addAttribute("action", "/admin/sponsors/ajout");
 		model.addAttribute("titres", Entreprise.getAttributes());
 		model.addAttribute("objets", es.getAllSponsor());
 		model.addAttribute("attributs", Entreprise.getAttributesType());
