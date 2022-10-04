@@ -2,11 +2,14 @@ package com.simplon.course_voilier.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.simplon.course_voilier.model.key.InscriptionKey;
@@ -19,19 +22,20 @@ import lombok.Data;
 public class Inscription implements Model{
 
 	@EmbeddedId
+	@AttributeOverrides({
+        @AttributeOverride(name = "id.voilier", column = @Column(name = "id_voilier")),
+        @AttributeOverride(name = "id.course", column = @Column(name = "id_course")),
+        @AttributeOverride(name = "id.equipage", column = @Column(name = "id_equipage"))})
 	private InscriptionKey id;
 	
-	@ManyToOne
-	@MapsId("id_equipage")
-	@JoinColumn(name="id_equipage",referencedColumnName = "id_equipage")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_equipage",referencedColumnName = "id_equipage",insertable = false, updatable = false)
 	private Equipage equipage;
-	@ManyToOne
-	@MapsId("id_voilier")
-	@JoinColumn(name="id_voilier",referencedColumnName = "id_voilier")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_voilier",referencedColumnName = "id_voilier",insertable = false, updatable = false)
 	private Voilier voilier;
-	@ManyToOne
-	@MapsId("id_course")
-	@JoinColumn(name="id_course",referencedColumnName = "id_course")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_course",referencedColumnName = "id_course",insertable = false, updatable = false)
 	private Course course;
 	private Boolean desistement;
 	

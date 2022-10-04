@@ -5,16 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.simplon.course_voilier.model.Epreuve;
+import com.simplon.course_voilier.model.Voilier;
+
 import lombok.Data;
 
 @Data
 @Embeddable
-public class InscriptionKey implements Serializable{
+public class ResultatKey implements Serializable{
 
-	@Column(name="id_course")
-	private int course;
 	@Column(name="id_voilier")
 	private int voilier;
-	@Column(name="id_equipage")
-	private int equipage;
+	@Column(name="id_epreuve")
+	private int epreuve;
+	
 }

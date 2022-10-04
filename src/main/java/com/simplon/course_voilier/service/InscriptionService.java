@@ -13,7 +13,7 @@ public class InscriptionService {
 	InscriptionRepo ir;
 	
 	public Iterable<Inscription> getInscription(int idCourse) {
-		return ir.findByCourse_Id(idCourse);
+		return ir.findByIdCourse(idCourse);
 	}
 	
 	public void addInscription(Inscription inscription) {

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.simplon.course_voilier.model.Course;
 import com.simplon.course_voilier.model.Epreuve;
 import com.simplon.course_voilier.model.Inscription;
+import com.simplon.course_voilier.model.Resultat;
 import com.simplon.course_voilier.model.key.InscriptionKey;
 import com.simplon.course_voilier.service.CourseService;
 import com.simplon.course_voilier.service.EpreuveService;
 import com.simplon.course_voilier.service.InscriptionService;
+import com.simplon.course_voilier.service.ResultatService;
 
 @Controller
 public class CourseController {
@@ -27,6 +29,8 @@ public class CourseController {
 	InscriptionService is;
 	@Autowired
 	EpreuveService es;
+	@Autowired
+	ResultatService rs;
 	
 	@GetMapping("/admin/courses")
 	public String getCourses(Model model) {
@@ -98,15 +102,26 @@ public class CourseController {
 	public String addInscription(@PathVariable int id, @ModelAttribute Inscription inscription, Model model) {
 		
 		InscriptionKey key = new InscriptionKey();
-		key.setIdCourse(id);
-		key.setIdEquipage(inscription.getEquipage().getId());
-		key.setIdVoilier(inscription.getVoilier().getId());
+		key.setCourse(id);
+		key.setEquipage(inscription.getEquipage().getId());
+		key.setVoilier(inscription.getVoilier().getId());
 		
-		inscription.setCourse(cs.getCourse(id).get());
+		inscription.setEquipage(null);
+		
 		inscription.setId(key);
 		
 		is.addInscription(inscription);
 		
 		return "redirect:/admin/course/"+id+"inscription";
+	}
+	
+	@GetMapping("/admin/epreuves/{id}")
+	public String  updateEpreuve(@PathVariable int id, Model model) {
+		
+		model.addAttribute("titres", Resultat.getAttributes());
+		model.addAttribute("objets", rs.getResultat(id));
+
+		
+		return "gestion";
 	}
 }
