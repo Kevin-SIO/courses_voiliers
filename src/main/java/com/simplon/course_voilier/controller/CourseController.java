@@ -105,13 +105,6 @@ public class CourseController {
 		inscription.setDesistement(false);
 		
 		is.addInscription(inscription);
-//		InscriptionKey key = new InscriptionKey();
-//		
-//		key.setCourse(id);
-//		
-//		inscription.setId(key);
-//		
-//		is.addInscription(inscription);
 		
 		return "redirect:/admin/course/"+id+"/inscription";
 	}
