@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.simplon.course_voilier.model.Course;
 import com.simplon.course_voilier.model.Epreuve;
@@ -67,7 +68,7 @@ public class CourseController {
 		model.addAttribute("titres", titres);
 		model.addAttribute("objets", is.getInscription(id));
 		model.addAttribute("attributs", attributs);
-		model.addAttribute("newObject", new Inscription());
+		model.addAttribute("newObject", new InscriptionKey());
 		
 		return "gestion";
 	}
@@ -76,10 +77,8 @@ public class CourseController {
 	public String epreuvebyCourse(@PathVariable int id, Model model) {
 		
 		ArrayList<String> titres = Epreuve.getAttributes();
-		titres.remove(4);
 		
 		ArrayList<String> attributs = Epreuve.getAttributesType();
-		attributs.remove(4);
 		
 		model.addAttribute("action", "/admin/courses/"+id+"/epreuves/ajout");
 		model.addAttribute("titres", titres);
@@ -99,20 +98,22 @@ public class CourseController {
 	}
 	
 	@PostMapping("admin/courses/{id}/inscriptions/ajout")
-	public String addInscription(@PathVariable int id, @ModelAttribute Inscription inscription, Model model) {
+	public String addInscription(@PathVariable int id, @ModelAttribute InscriptionKey ik, Model model) {
 		
-		InscriptionKey key = new InscriptionKey();
-		key.setCourse(id);
-		key.setEquipage(inscription.getEquipage().getId());
-		key.setVoilier(inscription.getVoilier().getId());
-		
-		inscription.setEquipage(null);
-		
-		inscription.setId(key);
+		Inscription inscription = new Inscription();
+		inscription.setId(ik);
+		inscription.setDesistement(false);
 		
 		is.addInscription(inscription);
+//		InscriptionKey key = new InscriptionKey();
+//		
+//		key.setCourse(id);
+//		
+//		inscription.setId(key);
+//		
+//		is.addInscription(inscription);
 		
-		return "redirect:/admin/course/"+id+"inscription";
+		return "redirect:/admin/course/"+id+"/inscription";
 	}
 	
 	@GetMapping("/admin/epreuves/{id}")
