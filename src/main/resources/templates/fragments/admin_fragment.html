@@ -47,7 +47,7 @@
     <table class="table">
         <thead>
             <tr>
-                <td th:each="titre : ${titres}" th:text="${titre}"></td>
+                <td class="is-capitalized" th:each="titre : ${titres}" th:text="${titre}"></td>
             </tr>
         </thead>
         <tbody>
@@ -89,4 +89,30 @@
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
+</div>
+
+<div th:template="updateForm">
+    <form th:action="@{${action}}" method="post" class="box" th:object="${newObject}">
+        <div th:each="attribut, stat : ${attributs}" th:if="${titres[stat.index]} != 'id'">
+            <div class="field">
+                <label class="label" th:text="${titres[stat.index]}"></label>
+                <div class="control" th:switch="${attribut}">
+                    <input th:name="${titres[stat.index]}" class="input" type="text" th:case="String">
+                    <input th:name="${titres[stat.index]}" class="input" type="date" th:case="Date">
+                    <span th:case="Boolean">
+                        <input th:name="${titres[stat.index]}" type="radio" value="true" th:text="  Oui">
+                        <input th:name="${titres[stat.index]}" type="radio" value="false" th:text="  Non" checked>
+                    </span>
+                    
+                    <input th:name="${titres[stat.index]}" class="input" type="number" th:case="*">
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="field">
+            <div class="control">
+            <button class="button is-link" type="submit">Modifier</button>
+            </div>
+        </div>   
+    </form>
 </div>

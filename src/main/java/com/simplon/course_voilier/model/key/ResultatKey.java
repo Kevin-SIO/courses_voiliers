@@ -19,4 +19,13 @@ public class ResultatKey implements Serializable{
 	@Column(name="id_epreuve")
 	private int epreuve;
 	
+	public ResultatKey(Voilier v, Epreuve e) {
+		this.voilier = v.getId();
+		this.epreuve = e.getId();
+	}
+	
+	public ResultatKey() {
+		
+	}
+	
 }

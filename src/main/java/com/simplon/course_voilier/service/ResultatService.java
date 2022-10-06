@@ -15,4 +15,8 @@ public class ResultatService {
 	public Iterable<Resultat> getResultat(int idEpreuve) {
 		return rr.findByIdEpreuve(idEpreuve);
 	}
+	
+	public void addResultat(Resultat r) {
+		rr.save(r);
+	}
 }

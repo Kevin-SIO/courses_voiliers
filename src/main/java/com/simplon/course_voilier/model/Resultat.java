@@ -36,6 +36,13 @@ public class Resultat implements Model{
 	private Voilier voilier;
 	private Time temps;
 	
+	public Resultat(Epreuve e, Voilier v) {
+		this.id = new ResultatKey(v,e);
+	}
+	
+	public Resultat() {
+		
+	}
 	
 	public ArrayList<String> getAttributesValues() {
 		ArrayList<String> r = new ArrayList<>();
