@@ -2,6 +2,8 @@ package com.simplon.course_voilier.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,11 +77,13 @@ public class CourseController {
 		return "gestion";
 	}
 	
-	@PostMapping("admin/courses/{id}/inscriptions/ajout")
+	@PostMapping("/admin/courses/{id}/inscriptions/ajout")
 	public String addInscription(@PathVariable int id, @ModelAttribute InscriptionKey ik, Model model) {
 		
 		Inscription inscription = new Inscription();
+		
 		ik.setCourse(id);
+		
 		inscription.setId(ik);
 		inscription.setDesistement(false);
 		
@@ -108,7 +112,7 @@ public class CourseController {
 		return "gestion";
 	}
 	
-	@PostMapping("admin/courses/{id}/epreuves/ajout")
+	@PostMapping("/admin/courses/{id}/epreuves/ajout")
 	public String addEpreuve(@PathVariable int id, @ModelAttribute Epreuve epreuve, Model model) {
 		epreuve.setCourse(cs.getCourse(id).get());
 		es.addEpreuve(epreuve);
@@ -120,12 +124,22 @@ public class CourseController {
 	@GetMapping("/admin/epreuves/{id}")
 	public String  updateEpreuve(@PathVariable int id, Model model) {
 		
-		model.addAttribute("titres", Resultat.getAttributes());
-		
-		model.addAttribute("reulstats", rs.getResultat(id));
-
+		model.addAttribute("action", "/admin/epreuves/"+id+"/update");
+		model.addAttribute("titres", Epreuve.getAttributes());
+		model.addAttribute("attributs", Epreuve.getAttributesType());
+		model.addAttribute("objet", es.getEpreuveById(id));
+		model.addAttribute("idEpreuve", id);
+				
+		model.addAttribute("resultats", rs.getResultat(id));
 		
 		return "update_epreuve";
+	}
+	
+	@PostMapping("/admin/resultat/update")
+	public String updateResultat(HttpServletRequest request) {
+		
+		rs.updateResultat(request.getParameter("temps"), Integer.valueOf(request.getParameter("voilier")), Integer.valueOf(request.getParameter("id")));
+		return "redirect:/admin/epreuves/" + request.getParameter("id");
 	}
 	
 

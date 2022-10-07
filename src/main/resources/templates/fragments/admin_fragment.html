@@ -91,7 +91,7 @@
     </div>
 </div>
 
-<div th:template="updateForm">
+<div th:template="update_form">
     <form th:action="@{${action}}" method="post" class="box" th:object="${newObject}">
         <div th:each="attribut, stat : ${attributs}" th:if="${titres[stat.index]} != 'id'">
             <div class="field">

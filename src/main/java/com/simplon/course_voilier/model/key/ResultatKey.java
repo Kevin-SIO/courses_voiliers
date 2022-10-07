@@ -24,6 +24,11 @@ public class ResultatKey implements Serializable{
 		this.epreuve = e.getId();
 	}
 	
+	public ResultatKey(int v, int e) {
+		this.voilier = v;
+		this.epreuve = e;
+	}
+	
 	public ResultatKey() {
 		
 	}

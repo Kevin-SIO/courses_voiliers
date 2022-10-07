@@ -40,6 +40,11 @@ public class Resultat implements Model{
 		this.id = new ResultatKey(v,e);
 	}
 	
+	public Resultat(int v, int e, Time t ) {
+		this.id = new ResultatKey(v,e);
+		this.temps = t;
+	}
+	
 	public Resultat() {
 		
 	}
